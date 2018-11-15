@@ -3,10 +3,10 @@
  */
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import MSite from '../pages/MSite/MSiite.vue'
-import Search from '../pages/Search/MSiite.vue'
-import MSite from '../pages/MSite/MSiite.vue'
-import MSite from '../pages/MSite/MSiite.vue'
+import MSite from '../pages/MSite/MSite.vue'
+import Search from '../pages/Search/MSite.vue'
+import MSite from '../pages/MSite/MSite.vue'
+import MSite from '../pages/MSite/MSite.vue'
 
 // 声明使用插件
 Vue.use(VueRouter)
