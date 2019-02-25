@@ -13,7 +13,7 @@
             <div :class="{on: loginWay}">
               <section class="login_message">
                 <input type="tel" maxlength="11" placeholder="手机号" v-model="phone">
-                <button disabled="disabled" class="get_verification" :class="{right_phone: rightPhone}">获取验证码</button>
+                <button disabled="disabled" class="get_verification" :class="{right_phone: rin}">获取验证码</button>
               </section>
               <section class="login_verification">
                 <input type="tel" maxlength="8" placeholder="验证码">
@@ -56,12 +56,6 @@
         data(){
           return {
             loginWay: true,//true代表短信登录，false表示密码登录
-            phone: '',//手机号
-          }
-        },
-        computed: {
-          rightPhone (){
-            return (/^1\d{10}$/.test(this.phone))
           }
         }
     }
@@ -127,8 +121,6 @@
                   color #ccc
                   font-size 14px
                   background transparent
-                  &.right_phone
-                    color black
               .login_verification
                 position relative
                 margin-top 16px

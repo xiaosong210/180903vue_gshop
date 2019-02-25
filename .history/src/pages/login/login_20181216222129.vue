@@ -56,7 +56,6 @@
         data(){
           return {
             loginWay: true,//true代表短信登录，false表示密码登录
-            phone: '',//手机号
           }
         },
         computed: {

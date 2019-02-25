@@ -56,12 +56,11 @@
         data(){
           return {
             loginWay: true,//true代表短信登录，false表示密码登录
-            phone: '',//手机号
           }
         },
         computed: {
           rightPhone (){
-            return (/^1\d{10}$/.test(this.phone))
+            return /^1{10}$/.test(this.phone)
           }
         }
     }
@@ -127,8 +126,6 @@
                   color #ccc
                   font-size 14px
                   background transparent
-                  &.right_phone
-                    color black
               .login_verification
                 position relative
                 margin-top 16px
