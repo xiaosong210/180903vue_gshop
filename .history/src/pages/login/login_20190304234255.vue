@@ -14,7 +14,7 @@
               <section class="login_message">
                 <input type="tel" maxlength="11" placeholder="手机号" v-model="phone">
                 <button :disabled="!rightPhone" class="get_verification" :class="{right_phone: rightPhone}" @click.prevent="getCode">
-                  {{ computeTime>0 ? `已发送(${computeTime}s)` : "获取验证码"}}
+                  {{ computeTime>0 ? `已发送(${computeTime}s)` : "获取验证码" }}
                 </button>
               </section>
               <section class="login_verification">
@@ -52,7 +52,7 @@
           <i class="iconfont icon-jiantou2"></i>
         </a>
       </div>
-      <AlertTip :alertText="alertText" v-show="alertShow" @closeTip="closeTip"></AlertTip>
+      <AlertTip :alertText="alertText" v-show="showAlert"></AlertTip>
     </section>
 </template>
 <script>
@@ -98,17 +98,16 @@
             }
           },
           showAlert(alertText){
-            this.alertShow = true;
+            this.showAlert = true;
             this.alertText = alertText
           },
           // 表单验证
           login(){
             if(this.loginWay){//短信登录
               const {rightPhone, phone, code} = this;
-              console.log(code)
               if(!this.rightPhone){
                 this.showAlert("手机号不正确")
-              }else if(!/^\d{6}$/.test(code)){
+              }else if(/^\d{6}$/.test(code)){
                 this.showAlert("验证必须是6位数字")
               }
             }else{//密码登录
@@ -121,10 +120,6 @@
                 this.showAlert("验证码必须指定")
               }
             }
-          },
-          closeTip(){
-            this.alertShow = false;
-            this.alertText = ''
           }
         }
     }

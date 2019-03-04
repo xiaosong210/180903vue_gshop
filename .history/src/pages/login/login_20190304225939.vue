@@ -9,16 +9,16 @@
           </div>
         </div>
         <div class="login_content">
-          <form @submit.prevent="login">
+          <form>
             <div :class="{on: loginWay}">
               <section class="login_message">
                 <input type="tel" maxlength="11" placeholder="手机号" v-model="phone">
                 <button :disabled="!rightPhone" class="get_verification" :class="{right_phone: rightPhone}" @click.prevent="getCode">
-                  {{ computeTime>0 ? `已发送(${computeTime}s)` : "获取验证码"}}
+                  {{ computeTime>0 ? `已发送(${computeTime}s)` : "获取验证码" }}
                 </button>
               </section>
               <section class="login_verification">
-                <input type="tel" maxlength="8" placeholder="验证码" v-model="code">
+                <input type="tel" maxlength="8" placeholder="验证码">
               </section>
               <section class="login_hint">
                 温馨提示：未注册硅谷外卖帐号的手机号，登录时将自动注册，且代表已同意
@@ -28,7 +28,7 @@
             <div :class="{on: !loginWay}">
               <section>
                 <section class="login_message">
-                  <input type="text" maxlength="11" placeholder="手机/邮箱/用户名" v-model="name">
+                  <input type="tel" maxlength="11" placeholder="手机/邮箱/用户名">
                 </section>
                 <section class="login_verification">
                   <input type="text" maxlength="8" placeholder="密码" v-show="showPwd" v-model="pwd">
@@ -39,7 +39,7 @@
                   </div>
                 </section>
                 <section class="login_message">
-                  <input type="text" maxlength="11" placeholder="验证码" v-model="captcha">
+                  <input type="text" maxlength="11" placeholder="验证码">
                   <img class="get_verification" src="./images/captcha.svg" alt="captcha">
                 </section>
               </section>
@@ -52,27 +52,17 @@
           <i class="iconfont icon-jiantou2"></i>
         </a>
       </div>
-      <AlertTip :alertText="alertText" v-show="alertShow" @closeTip="closeTip"></AlertTip>
     </section>
 </template>
 <script>
-    import AlertTip from '../../components/AlertTip/AlertTip.vue'
     export default{
-        components:{
-          AlertTip
-        },
         data(){
           return {
             loginWay: true,//true代表短信登录，false表示密码登录
             phone: '',//手机号
-            code: '',//短信验证码
-            name: '',//用户名
-            captcha: '',//图形验证码
             computeTime: 0,//计时时间
             showPwd:false,//是否显示密码
-            pwd: '',//密码
-            alertText: '',
-            alertShow: false,
+            pwd: ''//密码
           }
         },
         computed: {
@@ -81,7 +71,6 @@
           }
         },
         methods: {
-          // 获取短信验证码
           getCode(){
             // 如果当前没有计时
             if(!this.computeTime){
@@ -97,35 +86,6 @@
 
             }
           },
-          showAlert(alertText){
-            this.alertShow = true;
-            this.alertText = alertText
-          },
-          // 表单验证
-          login(){
-            if(this.loginWay){//短信登录
-              const {rightPhone, phone, code} = this;
-              console.log(code)
-              if(!this.rightPhone){
-                this.showAlert("手机号不正确")
-              }else if(!/^\d{6}$/.test(code)){
-                this.showAlert("验证必须是6位数字")
-              }
-            }else{//密码登录
-              const {name, pwd, captcha} = this;
-              if(!this.name){
-                this.showAlert("用户名必须指定")
-              }else if(!this.name){
-                this.showAlert("密码必须指定")
-              }else if(!this.captcha){
-                this.showAlert("验证码必须指定")
-              }
-            }
-          },
-          closeTip(){
-            this.alertShow = false;
-            this.alertText = ''
-          }
         }
     }
 </script>
@@ -232,7 +192,7 @@
                     box-shadow 0 2px 4px 0 rgba(0,0,0,.1)
                     transition transform .3s
                     &.right 
-                      transform translateX(30px)
+                      
               .login_hint
                 margin-top 12px
                 color #999

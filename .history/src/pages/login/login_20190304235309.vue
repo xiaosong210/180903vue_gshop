@@ -105,10 +105,9 @@
           login(){
             if(this.loginWay){//短信登录
               const {rightPhone, phone, code} = this;
-              console.log(code)
               if(!this.rightPhone){
                 this.showAlert("手机号不正确")
-              }else if(!/^\d{6}$/.test(code)){
+              }else if(/^\d{6}$/.test(code)){
                 this.showAlert("验证必须是6位数字")
               }
             }else{//密码登录
