@@ -10,9 +10,9 @@ selenium-debug.log
 
 # Editor directories and files
 .idea
+.history
 .vscodeccc
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
-.history
