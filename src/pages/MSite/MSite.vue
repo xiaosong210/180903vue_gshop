@@ -21,7 +21,7 @@
                   <span>{{category.title}}</span>
                 </a>
               </div>
-              
+
             </div>
             <!-- Add Pagination -->
             <div class="swiper-pagination"></div>
@@ -40,65 +40,66 @@
 </template>
 
 <script>
-    import { mapState } from 'vuex'
-    import Swiper from 'swiper'
-    import 'swiper/dist/css/swiper.min.css'
+import { mapState } from 'vuex'
+import Swiper from 'swiper'
+import 'swiper/dist/css/swiper.min.css'
 
-    import HeaderTop from '../../components/HeaderTop/HeaderTop.vue'
-    import ShopList from '../../components/ShopList/ShopList.vue'
+import HeaderTop from '../../components/HeaderTop/HeaderTop.vue'
+import ShopList from '../../components/ShopList/ShopList.vue'
 
-    export default {
-        data(){
-          return {
-            baseImageUrl: 'https://fuss10.elemecdn.com'
-          }
-        },
-        components: {
-            HeaderTop,
-            ShopList
-        },
-        mounted() {
-          this.$store.dispatch('getCategorys')
-          this.$store.dispatch('getShops')
-        },
-        computed: {
-            ...mapState(['address','categorys']),
-            /*
+export default {
+  data () {
+    return {
+      baseImageUrl: 'https://fuss10.elemecdn.com'
+    }
+  },
+  components: {
+    HeaderTop,
+    ShopList
+  },
+  mounted () {
+    this.$store.dispatch('getCategorys')
+    this.$store.dispatch('getShops')
+  },
+  computed: {
+    ...mapState(['address', 'categorys']),
+    /*
             根据categorys生成二维数组
             */
-           categorysArr(){
-             const {categorys} = this
-             const arr = []
-             let minArr = []
-              categorys.forEach(c => {
-                if(minArr.length === 8){
-                  minArr = []
-                }
-                if(minArr.length === 0){
-                  arr.push(minArr)
-                }
-                minArr.push(c)
-              });
-             return arr
-           }
-        },
-        watch: {
-          categorys(value){
-            // 界面更新就立即创建swiper对象，更新了数据，但是界面还没更新
-            this.$nextTick(()=>{
-              // 创建swiper轮播
-              new Swiper('.swiper-container', {
-                  loop: true,
-                  pagination: {
-                      el: '.swiper-pagination'
-                  }
-              })
-            })
-          }
+    categorysArr () {
+      const {categorys} = this
+      const arr = []
+      let minArr = []
+      categorys.forEach(c => {
+        if (minArr.length === 8) {
+          minArr = []
         }
+        if (minArr.length === 0) {
+          arr.push(minArr)
+        }
+        minArr.push(c)
+      })
+      return arr
     }
+  },
+  watch: {
+    categorys (value) {
+      // 界面更新就立即创建swiper对象，更新了数据，但是界面还没更新
+      this.$nextTick(() => {
+        // 创建swiper轮播
+        /* eslint-disable no-new */
+        new Swiper('.swiper-container', {
+          loop: true,
+          pagination: {
+            el: '.swiper-pagination'
+          }
+        })
+      })
+    }
+  }
+}
 </script>
- 
+
 <style lang="stylus" rel="stylesheet/stylus">
   @import "../../common/stylus/mixins.styl"
   .msite  //首页

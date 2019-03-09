@@ -49,21 +49,21 @@
 </template>
 
 <script>
-    import {mapState} from 'vuex'
-    import Star from '../Star/Star.vue'
-    export default {
-      data(){
-        return {
-          baseImageUrl: 'http://cangdu.org:8001/img/'
-        }
-      },
-      computed: {
-        ...mapState(['shops'])
-      },
-      components:{
-        Star
-      }
+import {mapState} from 'vuex'
+import Star from '../Star/Star.vue'
+export default {
+  data () {
+    return {
+      baseImageUrl: 'http://cangdu.org:8001/img/'
     }
+  },
+  computed: {
+    ...mapState(['shops'])
+  },
+  components: {
+    Star
+  }
+}
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 @import "../../common/stylus/mixins.styl"
@@ -218,5 +218,3 @@
                         .segmentation
                           color #ccc
 </style>
-
-

@@ -56,83 +56,80 @@
     </section>
 </template>
 <script>
-    import AlertTip from '../../components/AlertTip/AlertTip.vue'
-    export default{
-        components:{
-          AlertTip
-        },
-        data(){
-          return {
-            loginWay: true,//true代表短信登录，false表示密码登录
-            phone: '',//手机号
-            code: '',//短信验证码
-            name: '',//用户名
-            captcha: '',//图形验证码
-            computeTime: 0,//计时时间
-            showPwd:false,//是否显示密码
-            pwd: '',//密码
-            alertText: '',
-            alertShow: false,
-          }
-        },
-        computed: {
-          rightPhone (){
-            return (/^1\d{10}$/.test(this.phone))
-          }
-        },
-        methods: {
-          // 获取短信验证码
-          getCode(){
-            // 如果当前没有计时
-            if(!this.computeTime){
-              // 启动定时器
-              this.computeTime = 30;
-              const intervalId = setInterval(() => {
-                this.computeTime--;
-                if(this.computeTime <= 0){
-                  clearInterval(intervalId)
-                }
-              }, 1000);
-              // 发送请求，获取手机验证码
-
-            }
-          },
-          showAlert(alertText){
-            this.alertShow = true;
-            this.alertText = alertText
-          },
-          // 表单验证
-          login(){
-            if(this.loginWay){//短信登录
-              const {rightPhone, phone, code} = this;
-              console.log(code)
-              if(!this.rightPhone){
-                this.showAlert("手机号不正确")
-              }else if(!/^\d{6}$/.test(code)){
-                this.showAlert("验证必须是6位数字")
-              }
-            }else{//密码登录
-              const {name, pwd, captcha} = this;
-              if(!this.name){
-                this.showAlert("用户名必须指定")
-              }else if(!this.name){
-                this.showAlert("密码必须指定")
-              }else if(!this.captcha){
-                this.showAlert("验证码必须指定")
-              }
-            }
-          },
-          // 关闭警告框
-          closeTip(){
-            this.alertShow = false;
-            this.alertText = ''
-          },
-          // 获取图形验证码
-          getCaptcha(event){
-            event.target.src = "http://localhost:4000/captcha?time="+Date.now()
-          }
-        }
+import AlertTip from '../../components/AlertTip/AlertTip.vue'
+export default{
+  components: {
+    AlertTip
+  },
+  data () {
+    return {
+      loginWay: true, // true代表短信登录，false表示密码登录
+      phone: '', // 手机号
+      code: '', // 短信验证码
+      name: '', // 用户名
+      captcha: '', // 图形验证码
+      computeTime: 0, // 计时时间
+      showPwd: false, // 是否显示密码
+      pwd: '', // 密码
+      alertText: '',
+      alertShow: false
     }
+  },
+  computed: {
+    rightPhone () {
+      return (/^1\d{10}$/.test(this.phone))
+    }
+  },
+  methods: {
+    // 获取短信验证码
+    getCode () {
+      // 如果当前没有计时
+      if (!this.computeTime) {
+        // 启动定时器
+        this.computeTime = 30
+        const intervalId = setInterval(() => {
+          this.computeTime--
+          if (this.computeTime <= 0) {
+            clearInterval(intervalId)
+          }
+        }, 1000)
+        // 发送请求，获取手机验证码
+      }
+    },
+    showAlert (alertText) {
+      this.alertShow = true
+      this.alertText = alertText
+    },
+    // 表单验证
+    login () {
+      if (this.loginWay) { // 短信登录
+        const {code} = this
+        if (!this.rightPhone) {
+          this.showAlert('手机号不正确')
+        } else if (!/^\d{6}$/.test(code)) {
+          this.showAlert('验证必须是6位数字')
+        }
+      } else { // 密码登录
+        if (!this.name) {
+          this.showAlert('用户名必须指定')
+        } else if (!this.name) {
+          this.showAlert('密码必须指定')
+        } else if (!this.captcha) {
+          this.showAlert('验证码必须指定')
+        }
+      }
+    },
+    // 关闭警告框
+    closeTip () {
+      this.alertShow = false
+      this.alertText = ''
+    },
+    // 获取图形验证码
+    getCaptcha (event) {
+      event.target.src = 'http://localhost:4000/captcha?time=' + Date.now()
+    }
+  }
+}
 </script>
 <style lang="stylus" rel="stylesheet/stylus">
 @import "../../common/stylus/mixins.styl"
@@ -236,7 +233,7 @@
                     background #fff
                     box-shadow 0 2px 4px 0 rgba(0,0,0,.1)
                     transition transform .3s
-                    &.right 
+                    &.right
                       transform translateX(30px)
               .login_hint
                 margin-top 12px
@@ -273,4 +270,3 @@
             font-size 20px
             color #999
 </style>
-

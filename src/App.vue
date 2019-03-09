@@ -6,23 +6,23 @@
 </template>
 
 <script>
-    import { mapActions } from 'vuex'//映射函数
-    import FooterGuide from './components/FooterGuide/FooterGuide.vue'
+import { mapActions } from 'vuex'// 映射函数
+import FooterGuide from './components/FooterGuide/FooterGuide.vue'
 
-    export default{
-        components: {
-            FooterGuide
-        },
+export default{
+  components: {
+    FooterGuide
+  },
 
-        mounted(){
-            // this.$store.dispatch('getAddress')
-            this.getAddress();
-        },
+  mounted () {
+    // this.$store.dispatch('getAddress')
+    this.getAddress()
+  },
 
-        methods: {
-            ...mapActions(['getAddress'])
-        }
-    }
+  methods: {
+    ...mapActions(['getAddress'])
+  }
+}
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus">

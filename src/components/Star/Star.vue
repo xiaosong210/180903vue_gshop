@@ -5,35 +5,35 @@
 </template>
 
 <script>
-    const CLASS_ON = 'on'
-    const CLASS_HALF = 'half'
-    const CLASS_OFF = 'off'
-    export default{
-        props: {
-            score: Number,
-            size: Number
-        },
-        computed: {
-            starClasses(){
-                const {score} = this
-                const scs = []
-                // 向scs中添加n个CLASS_ON
-                const scoreInteger = Math.floor(score)
-                for(let i = 0; i<scoreInteger; i++){
-                    scs.push(CLASS_ON)
-                }
-                // 向scs中添加0/1个CLASS_HALF
-                if(score*10-scoreInteger*10 >=5){
-                    scs.push(CLASS_HALF)
-                }
-                // 向scs中添加n个CLASS_OFF
-                while(scs.length<5){
-                    scs.push(CLASS_OFF)
-                }
-                return scs
-            }
-        }
+const CLASS_ON = 'on'
+const CLASS_HALF = 'half'
+const CLASS_OFF = 'off'
+export default{
+  props: {
+    score: Number,
+    size: Number
+  },
+  computed: {
+    starClasses () {
+      const {score} = this
+      const scs = []
+      // 向scs中添加n个CLASS_ON
+      const scoreInteger = Math.floor(score)
+      for (let i = 0; i < scoreInteger; i++) {
+        scs.push(CLASS_ON)
+      }
+      // 向scs中添加0/1个CLASS_HALF
+      if (score * 10 - scoreInteger * 10 >= 5) {
+        scs.push(CLASS_HALF)
+      }
+      // 向scs中添加n个CLASS_OFF
+      while (scs.length < 5) {
+        scs.push(CLASS_OFF)
+      }
+      return scs
     }
+  }
+}
 </script>
 
 <style lang="stylus" rel=""stylesheet/stylus>
@@ -87,4 +87,3 @@
         &.off
             bg-image('./images/star24_off')
 </style>
-
